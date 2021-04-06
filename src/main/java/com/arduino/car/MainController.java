@@ -20,8 +20,10 @@ import org.apache.http.client.methods.HttpGet;
         @GetMapping("move")
             public String move(String command, String value ) throws Exception {
             HttpGet request = new HttpGet("http://192.168.178.56");
+            if(value.indexOf(".") != -1)
+            value = value.substring(0, value.indexOf("."));
 
-            request = new HttpGet("http://192.168.178.56/" + command+"?value="+Integer.parseInt(value));
+            request = new HttpGet("http://192.168.178.56/"+command+"?value="+Integer.parseInt(value));
 //          request = new HttpGet("http://85d519b77517.ngrok.io/" + command+"?value="+Integer.parseInt(value));
 
             try (CloseableHttpResponse response = httpClient.execute(request)) {
